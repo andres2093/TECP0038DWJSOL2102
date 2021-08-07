@@ -1,14 +1,3 @@
-// const http = require('http')
-
-// let server = http.createServer(function(req, res) {
-//   console.log(req);
-//   res.end("Hola mundo!!!")
-// })
-
-// server.listen(3000, function() {
-//   console.log('Servidor corriendo!!!');
-// })
-
 const https = require('https')
 const fs = require('fs')
 const path = require('path')
