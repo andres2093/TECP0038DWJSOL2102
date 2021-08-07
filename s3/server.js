@@ -121,22 +121,72 @@ const fs = require('fs')
 // RETO 2
 // Función de utilidad para crear una promesa por conseguir el contenido de un
 // archivo de forma asíncrona.
-let obtenerArchivo = (archivo) => {
+// let obtenerArchivo = (archivo) => {
+//   return new Promise((resolve, reject) => {
+//       fs.readFile(__dirname + "/" + archivo, "utf-8", (err, datos) => {
+//       if (err) return reject(err);
+//       datos = datos.replace(/\r?\n/g, " ");
+//       resolve(datos);
+//       });
+//   });
+// };
+
+// let files = Promise.all([
+//   obtenerArchivo("ar1.txt"),
+//   obtenerArchivo("ar2.txt"),
+//   obtenerArchivo("ar3.txt"),
+// ]);
+
+// files
+//   .then((data) => console.log("Then: ", data))
+//   .catch((error) => console.log("Catch: ", error))
+
+
+// ASYNC/AWAIT
+let obtenerPokemon = (pokemon) => {
   return new Promise((resolve, reject) => {
-      fs.readFile(__dirname + "/" + archivo, "utf-8", (err, datos) => {
-      if (err) return reject(err);
-      datos = datos.replace(/\r?\n/g, " ");
-      resolve(datos);
-      });
-  });
-};
+    https.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`, (res) => {
+      let data = ''
+      res.setEncoding('utf-8')
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        let body = JSON.parse(JSON.stringify(data))
+        resolve(body)
+      })
+    }).on('error', (err) => {
+      reject(err.message)
+    })
+  })
+}
 
-let files = Promise.all([
-  obtenerArchivo("ar1.txt"),
-  obtenerArchivo("ar2.txt"),
-  obtenerArchivo("ar3.txt"),
-]);
+const pokemones = [
+  "bulbasaur",
+  "pikachu"
+]
 
-files
-  .then((data) => console.log("Then: ", data))
+let atraparPokemones = async (pokemones) => {
+  try {
+    let resultados = await Promise.all(
+      pokemones.map(async (pokemon) => {
+        let resultado = await obtenerPokemon(pokemon)
+        console.log('Pokemon atrapado: ', pokemon);
+        return resultado
+      })
+    )
+    return resultados
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
+
+atraparPokemones(pokemones)
+  // .then((data) => console.log("Then: ", data))
+  .then((collection) => {
+    console.log("Promesas completadas");
+    collection.forEach((elemento, i) => {
+      console.log(i, ": ", JSON.parse(elemento).name);
+    })
+  })
   .catch((error) => console.log("Catch: ", error))
