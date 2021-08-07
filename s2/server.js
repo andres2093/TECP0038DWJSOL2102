@@ -1,6 +1,7 @@
 // const http = require('http')
 
 // let server = http.createServer(function(req, res) {
+//   console.log(req);
 //   res.end("Hola mundo!!!")
 // })
 
@@ -44,11 +45,29 @@ const fs = require('fs')
 // })
 
 // Síncrono
-fs.writeFileSync(path.join(__dirname, '/ej1.txt'), 'Este es el texto 1', {encoding: 'utf-8'});
-console.log('writeFileSync:','Archivo creado!');
+// fs.writeFileSync(path.join(__dirname, '/ej1.txt'), 'Este es el texto 1', {encoding: 'utf-8'});
+// console.log('writeFileSync:','Archivo creado!');
 
-data = fs.readFileSync(path.join(__dirname, '/ej1.txt'), {encoding: 'utf-8'})
+// data = fs.readFileSync(path.join(__dirname, '/ej1.txt'), {encoding: 'utf-8'})
+// console.log('readFileSync:', data)
+
+// fs.appendFileSync(path.join(__dirname, '/ej1.txt'), '\nEsto es una nueva línea');
+// console.log('appendFile:','Archivo actualizado!');
+
+// Reto 1
+data = fs.readFileSync(path.join(__dirname, '/input.txt'), {encoding: 'utf-8'})
 console.log('readFileSync:', data)
 
-fs.appendFileSync(path.join(__dirname, '/ej1.txt'), '\nEsto es una nueva línea');
-console.log('appendFile:','Archivo actualizado!');
+let spaces = 0, lines = 0;
+
+for(i in data){
+  if(data.charCodeAt(i) === 10){
+    lines++
+  } else if(data.charCodeAt(i) === 32){
+    spaces++
+  }
+}
+
+console.log('Caracteres: ', data.length);
+console.log('Lineas: ', lines);
+console.log('Espacios: ', spaces);
