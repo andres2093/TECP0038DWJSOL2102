@@ -104,16 +104,39 @@ const fs = require('fs')
 //   .then((data) => console.log("Then: ", data))
 //   .catch((error) => console.log("Catch: ", error))
 
-let pr1 = new Promise((resolve, reject) => {
-  setTimeout(reject, 1000, "1")
-})
-let pr2 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 2000, "2")
-})
-let pr3 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 3000, "3")
-})
+// let pr1 = new Promise((resolve, reject) => {
+//   setTimeout(reject, 1000, "1")
+// })
+// let pr2 = new Promise((resolve, reject) => {
+//   setTimeout(resolve, 2000, "2")
+// })
+// let pr3 = new Promise((resolve, reject) => {
+//   setTimeout(resolve, 3000, "3")
+// })
 
-Promise.all([pr1, pr2, pr3])
+// Promise.all([pr1, pr2, pr3])
+//   .then((data) => console.log("Then: ", data))
+//   .catch((error) => console.log("Catch: ", error))
+
+// RETO 2
+// Función de utilidad para crear una promesa por conseguir el contenido de un
+// archivo de forma asíncrona.
+let obtenerArchivo = (archivo) => {
+  return new Promise((resolve, reject) => {
+      fs.readFile(__dirname + "/" + archivo, "utf-8", (err, datos) => {
+      if (err) return reject(err);
+      datos = datos.replace(/\r?\n/g, " ");
+      resolve(datos);
+      });
+  });
+};
+
+let files = Promise.all([
+  obtenerArchivo("ar1.txt"),
+  obtenerArchivo("ar2.txt"),
+  obtenerArchivo("ar3.txt"),
+]);
+
+files
   .then((data) => console.log("Then: ", data))
   .catch((error) => console.log("Catch: ", error))
