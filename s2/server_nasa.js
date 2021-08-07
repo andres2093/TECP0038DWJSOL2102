@@ -22,7 +22,7 @@ function getApi() {
       console.log('Explicacion: ', body.explanation);
       console.log('Url: ', body.url);
 
-      descargarImagen(body.url, body.title)
+      descargarImagen(body.url, body.title.replace(":", ""))
     })
   }).on('error', (err) => {
     console.log('Error: ', err);
