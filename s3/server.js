@@ -163,7 +163,15 @@ let obtenerPokemon = (pokemon) => {
 
 const pokemones = [
   "bulbasaur",
-  "pikachu"
+  "charmander",
+  "squirtle",
+  "pidgey",
+  "pikachu",
+  "rattata",
+  "alakazam",
+  "onix",
+  "mew",
+  "wigglytuff",
 ]
 
 let atraparPokemones = async (pokemones) => {
