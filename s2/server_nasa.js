@@ -4,6 +4,7 @@ const path = require('path')
 
 function descargarImagen(url, imageName) {
   let file = fs.createWriteStream(path.join(__dirname, '', imageName + ".png"));
+  console.log(path.join(__dirname, '', imageName + ".png"));
   https.get(url, function (response) {
     response.pipe(file);
   });
@@ -22,7 +23,8 @@ function getApi() {
       console.log('Explicacion: ', body.explanation);
       console.log('Url: ', body.url);
 
-      descargarImagen(body.url, body.title.replace(":", ""))
+      let imageName = body.title.replace(/:/g, '').replace(/ /g, '_');
+      descargarImagen(body.url, imageName)
     })
   }).on('error', (err) => {
     console.log('Error: ', err);
