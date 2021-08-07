@@ -62,4 +62,58 @@ function getApi(callback) {
   })
 }
 
-getApi(ordernar)
+// getApi(ordernar)
+
+// PROMESAS
+// let promesa = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//       let numero = Math.random();
+//       console.log(numero);
+//       if(numero >= 0.5) resolve("Exito");
+//       reject("Error");
+//   }, 2000);
+// })
+
+// promesa
+//   .then((data) => console.log("Then: ", data))
+//   .catch((error) => console.log("Catch: ", error))
+
+// function evaluarNumero(usuario, contreania) {
+//   return new Promise((resolve, reject) => {
+//     if(usuario === "Andres" && contreania === 1234) return resolve("Bienvenido!!!");
+//     return reject("Credenciales invalidas!!!");
+//   })
+// }
+
+// evaluarNumero("Andres", 1234)
+//   .then((data) => console.log("Then: ", data))
+//   .catch((error) => console.log("Catch: ", error))
+
+const fs = require('fs')
+
+// function readFile(path) {
+//   return new Promise((resolve, reject) => {
+//       fs.readFile(path, "utf-8", (err, data) => {
+//           if(err) return reject(err);
+//           return resolve(data);
+//       })
+//   })
+// }
+
+// readFile("./ar.txt")
+//   .then((data) => console.log("Then: ", data))
+//   .catch((error) => console.log("Catch: ", error))
+
+let pr1 = new Promise((resolve, reject) => {
+  setTimeout(reject, 1000, "1")
+})
+let pr2 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 2000, "2")
+})
+let pr3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 3000, "3")
+})
+
+Promise.all([pr1, pr2, pr3])
+  .then((data) => console.log("Then: ", data))
+  .catch((error) => console.log("Catch: ", error))
