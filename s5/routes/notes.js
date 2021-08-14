@@ -44,12 +44,27 @@ router.post('/', async (req, res) => {
   return res.json({ message: 'Nota creada!!!', data: note })
 })
 
-router.put('/:id', (req, res) => {
-  return res.json({ message: 'Actualizado!!!' })
+router.put('/:id', async (req, res) => {
+  const { body, params: { id } } = req;
+  const note = await Note.findByPk(id);
+  if(!note){
+      return res.status(404).json({ message: 'Note not found!' });
+  }
+  const updateNote = await note.update({
+      heading: body.heading,
+      content: body.content
+  })
+  return res.json({ message: 'Nota actualizada !!!', data: updateNote });
 })
 
-router.delete('/:id', (req, res) => {
-  return res.json({ message: 'Eliminado!!!' })
+router.delete('/:id', async (req, res) => {
+  const { params: { id } } = req;
+  const note = await Note.findByPk(id);
+  if(!note){
+      return res.status(404).json({ message: 'Note not found!' });
+  }
+  await note.destroy();
+  return res.json({ message: 'Nota eliminada!!!' });
 })
 
 module.exports = router
