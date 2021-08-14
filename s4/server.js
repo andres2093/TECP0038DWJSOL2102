@@ -77,7 +77,7 @@ const calc = () => {
     }
     console.log(res);
     res += '\n'
-    text += res
+    text += new Date().getTime() + ": " + res
 }
 
 const again = () => (
