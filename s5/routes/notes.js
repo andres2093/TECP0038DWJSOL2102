@@ -34,6 +34,14 @@ router.get('/', async (req, res)=> {
   return res.json(notes)
 })
 
+router.get('/:search', async (req, res) => {
+  let { params: { search } } = req;
+  search = '%' + search + '%';
+  console.log(search);
+  const notes = await Note.findAll({ where: { heading: { [Op.like]: search} }});
+  return res.json(notes);
+});
+
 router.post('/', async (req, res) => {
   const { body } = req
   const note = await Note.create({
