@@ -1,4 +1,6 @@
-let num1, num2, opcion;
+const fs = require('fs')
+
+let num1, num2, opcion, text = '';
 
 const readLine = require('readline').createInterface({
     input: process.stdin,
@@ -74,6 +76,8 @@ const calc = () => {
             break;
     }
     console.log(res);
+    res += '\n'
+    text += res
 }
 
 const again = () => (
@@ -83,6 +87,8 @@ const again = () => (
                 process.stdout.write('\033c');
                 main();
             } else if(answer === '2') {
+                fs.writeFileSync(`${new Date().getTime()}.txt`, text, { encoding: 'utf-8' })
+                console.log('Archivo creado!!!');
                 readLine.close()
             } else {
                 process.stdout.write('\033c');
