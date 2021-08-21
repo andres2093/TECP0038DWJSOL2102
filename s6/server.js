@@ -16,3 +16,8 @@ app.listen(3000, () => {
 // port: 19896
 // ip: 181.215.242.81
 // user: admin
+
+// Crear archivos
+// ./node_modules/sequelize-cli/lib/sequelize migration:create --name CreateTableProducts
+// Ejecutar migración
+// ./node_modules/sequelize-cli/lib/sequelize db:migrate
