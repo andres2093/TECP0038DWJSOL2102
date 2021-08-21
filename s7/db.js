@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize')
 
 const Product = require('./models/product')
 const Review = require('./models/review')
+const User = require('./models/user')
 
 const sequelize = new Sequelize(
   'ligefin', 'admin', 'doyidet297', {
@@ -13,7 +14,8 @@ const sequelize = new Sequelize(
 
 const models = [
   Product,
-  Review
+  Review,
+  User
 ]
 
 for(let model of models){
