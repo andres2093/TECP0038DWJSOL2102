@@ -4,7 +4,7 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// app.use('/api', require('./routes'))
+app.use('/api', require('./routes'))
 
 app.listen(3000, () => {
   console.log("localhost:3000");
