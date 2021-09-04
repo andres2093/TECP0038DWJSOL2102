@@ -24,6 +24,9 @@ app.listen(process.env.PORT, () => {
 // ip: 181.215.242.81
 // user: admin
 
+// Conexión desde la terminal a la DB
+// mysql -h mysql-46184-0.cloudclusters.net -P 19896 -u admin -pdoyidet297
+
 // Crear archivos
 // ./node_modules/sequelize-cli/lib/sequelize migration:create --name CreateTableUsers
 // Ejecutar migración
